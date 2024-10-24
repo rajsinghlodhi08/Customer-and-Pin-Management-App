@@ -1,0 +1,3 @@
+.custom_select .ngx-select__selected-plural { background: none; color: #000; border: none; }/* You can add global styles to this file, and also import other style files */
+.custom_select .ngx-select__selected-plural:hover { background: none; color: #000; border: none; }/* You can add global styles to this file, and also import other style files */
+.min-vh-50 { min-height: 50vh; }

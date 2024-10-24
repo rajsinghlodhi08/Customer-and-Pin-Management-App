@@ -1,0 +1,77 @@
+<div class="form-container">
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+    <!-- title -->
+    <div class="mb-2 row">
+      <div class="col-md-2">
+      <label for="title">Title<span class="text-danger">*</span></label>
+      </div>
+      <div class="col-md-10">
+      <input class="form-control"  placeholder="Enter Title" id="title" formControlName="title" type="text" required maxlength="64"/>
+   
+      <div *ngIf="customerForm.get('title')?.invalid && (customerForm.get('title')?.touched || customerForm.get('title')?.dirty)">
+        <small class="text-danger" *ngIf="customerForm.get('title')?.errors?.['required']">Title is required.</small>
+      </div>
+      </div>
+    </div>
+<!-- email -->
+    <div class="mb-2 row">
+      <div class="col-md-2">
+      <label for="email">Email<span class="text-danger">*</span></label>
+      </div>
+      <div class="col-md-10">
+      <input class="form-control" placeholder="Enter Email" id="email" formControlName="email" type="email" required maxlength="64"/>
+   
+      <div *ngIf="customerForm.get('email')?.invalid && (customerForm.get('email')?.touched || customerForm.get('email')?.dirty)">
+        <small class="text-danger" *ngIf="customerForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small class="text-danger" *ngIf="customerForm.get('email')?.errors?.['email']">Please enter a valid email address.</small>
+      </div>
+    </div>
+    </div>
+<!--Region  -->
+    <div class="mb-2 row">
+      <div class="col-md-2">
+      <label for="region">Region<span class="text-danger">*</span></label>
+      </div>
+      <div class="col-md-10">
+      <ngx-select  (select)="onRegionChange($event)"
+        [items]="regions" 
+        formControlName="region"
+        optionValueField="value" 
+        placeholder="Select Region"
+        optionTextField="text" class="w-100">
+      </ngx-select>
+    
+      <div *ngIf="customerForm.get('region')?.invalid && (customerForm.get('region')?.touched || customerForm.get('region')?.dirty)">
+        <small class="text-danger" *ngIf="customerForm.get('region')?.errors?.['required']">Region is required.</small>
+      </div>
+    </div>
+    </div>
+<!-- Country -->
+    <div class="mb-2 row">
+      <div class="col-md-2">
+      <label for="country">Country<span class="text-danger">*</span></label>
+      </div>
+      <div class="col-md-10">
+      <ngx-select 
+        [items]="filteredCountries" 
+        formControlName="country"
+        optionValueField="code" 
+        placeholder="Select Country"
+        optionTextField="name"  class="w-100">
+      </ngx-select >
+   
+      <div *ngIf="customerForm.get('country')?.invalid && (customerForm.get('country')?.touched || customerForm.get('country')?.dirty)">
+        <small class="text-danger" *ngIf="customerForm.get('country')?.errors?.['required']">Country is required.</small>
+      </div>
+    </div>
+    </div>
+    <!-- button -->
+    <div class="pt-3 text-center">
+    <button type="submit" class="btn btn-primary">Create Customer</button>
+  </div>
+  </form>
+  
+  <div class="text-center mt-3">
+      <h6 class="text-success">{{success}}</h6>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<form [formGroup]="pinForm" (ngSubmit)="onSubmitPin()" class="needs-validation" novalidate>
+  <!-- Title Input -->
+  <div class="mb-3 row">
+    <div class="col-md-4">
+      <label for="pinTitle" class="form-label">Title<span class="text-danger">*</span></label>
+    </div>
+    <div class="col-md-8">
+      <input id="pinTitle" formControlName="title" type="text" class="form-control" placeholder="Enter Title" required maxlength="64" />
+      <div *ngIf="pinForm.get('title')?.invalid && (pinForm.get('title')?.touched || submitted)"
+        class="invalid-feedback d-block">
+        <small *ngIf="pinForm.get('title')?.errors?.['required']" class="text-danger">
+          Title is required.
+        </small>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Image Input -->
+  <div class="mb-3 mt-2 row">
+    <div class="col-md-4">
+      <label for="pinImage" class="form-label text-nowrap">Select Image<span class="text-danger w-30">*</span></label>
+    </div>
+    <div class="col-md-8">
+      <input id="pinImage" type="file" ng2FileSelect [uploader]="uploader" class="form-control" required />
+
+      <div *ngIf="pinForm.get('image')?.invalid && (pinForm.get('image')?.touched || submitted)"
+        class="invalid-feedback d-block">
+        <small *ngIf="pinForm.get('image')?.errors?.['required']" class="text-danger">
+          Image is required.
+        </small>
+      </div>
+    </div>
+  </div>
+
+<!-- Collaborators -->
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label for="region" class="text-nowrap">Select Collaborators<span class="text-danger">*</span></label>
+    </div>
+    <div class="col-md-8">
+      <ngx-select [items]="collaboratorsList" formControlName="collaborators" optionValueField="value"
+        placeholder="Select Region" [multiple]="true" optionTextField="text" class="w-100 custom_select">
+      </ngx-select>
+      <div *ngIf="pinForm.get('collaborators')?.invalid && 
+      (pinForm.get('collaborators')?.touched || pinForm.get('collaborators')?.dirty)" class="text-danger">
+      <small *ngIf="pinForm.get('collaborators')?.errors?.['required']" class="text-danger">
+        At least one collaborator is required.
+      </small>
+    </div>
+    </div>
+  </div>
+
+
+  <!-- Privacy Radios -->
+  <div class="mb-3 row">
+    <div class="col-md-4">
+      <label class="form-label">Privacy<span class="text-danger">*</span></label>
+    </div>
+    <div class="col-md-8">
+      <div class="form-check d-inline-block me-2">
+        <input class="form-check-input" type="radio" id="private" formControlName="privacy" value="Private" required />
+        <label for="private" class="form-check-label">Private</label>
+      </div>
+      <div class="form-check d-inline-block">
+        <input class="form-check-input" type="radio" id="public" formControlName="privacy" value="Public" required />
+        <label for="public" class="form-check-label">Public</label>
+      </div>
+      <div *ngIf="pinForm.get('privacy')?.invalid && (pinForm.get('privacy')?.touched || submitted)"
+        class="invalid-feedback d-block">
+        <small *ngIf="pinForm.get('privacy')?.errors?.['required']" class="text-danger">
+          Privacy selection is required.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="d-flex justify-content-center pt-3">
+
+    <button type="submit" class="btn btn-primary">Create Pin</button>
+  </div>
+  <div class="text-center mt-3">
+    <h6 class="text-success">{{successMsg}}</h6>
+  </div>
+</form>

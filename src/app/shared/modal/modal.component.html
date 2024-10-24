@@ -1,0 +1,17 @@
+
+  <div class="modal fade show d-block" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ selectedForm === 'customer' ? 'Create Customer' : 'Create Pin' }}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+            <app-add-customer *ngIf="selectedForm === 'customer'" (submitCustomer)="onCustumerSubmit($event)"></app-add-customer>
+            <app-add-pin *ngIf="selectedForm === 'pin'" (pinCreated)="pinCreated.emit($event)" (submit)="onPinSubmit($event)"></app-add-pin>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
